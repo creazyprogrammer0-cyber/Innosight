@@ -37,6 +37,23 @@
     </script>
     <script>
       (function() {
+        // Guard against browser extensions (e.g. adblockers, security suites) attempting
+        // `window.fetch = ...` when window.fetch has only a getter in certain iframe contexts.
+        try {
+          if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
+            var currentFetch = window.fetch;
+            var desc = Object.getOwnPropertyDescriptor(window, 'fetch') || Object.getOwnPropertyDescriptor(Object.getPrototypeOf(window), 'fetch');
+            if (desc && !desc.writable && (desc.configurable || desc.set === undefined)) {
+              Object.defineProperty(window, 'fetch', {
+                get: function() { return currentFetch; },
+                set: function(fn) { currentFetch = fn; },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          }
+        } catch (e) {}
+
         try {
           var t = localStorage.getItem('innosight_theme');
           if (t === 'light') {
