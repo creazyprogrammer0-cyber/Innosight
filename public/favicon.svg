@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="favRibbonLeft" x1="15%" y1="90%" x2="45%" y2="20%">
+      <stop offset="0%" stop-color="#2364F5" />
+      <stop offset="60%" stop-color="#7025E8" />
+      <stop offset="100%" stop-color="#08C9F5" />
+    </linearGradient>
+    <linearGradient id="favRibbonCenter" x1="25%" y1="95%" x2="65%" y2="10%">
+      <stop offset="0%" stop-color="#1B4BD8" />
+      <stop offset="40%" stop-color="#2563EB" />
+      <stop offset="70%" stop-color="#08C9F5" />
+      <stop offset="100%" stop-color="#7BE5FF" />
+    </linearGradient>
+    <linearGradient id="favRibbonRight" x1="40%" y1="95%" x2="85%" y2="15%">
+      <stop offset="0%" stop-color="#4A148C" />
+      <stop offset="35%" stop-color="#7025E8" />
+      <stop offset="75%" stop-color="#D9039E" />
+      <stop offset="100%" stop-color="#F72585" />
+    </linearGradient>
+    <radialGradient id="favSphere" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="30%" stop-color="#FF77E9" />
+      <stop offset="70%" stop-color="#B5179E" />
+      <stop offset="100%" stop-color="#7025E8" />
+    </radialGradient>
+  </defs>
+  <path d="M22 75 C18 68, 20 58, 36 50 C32 60, 29 70, 24 76 Z" fill="url(#favRibbonLeft)" />
+  <path d="M25 76 C36 76, 45 68, 48 55 C51 40, 52 35, 60 36 C55 45, 52 56, 47 67 C42 74, 33 77, 25 76 Z" fill="url(#favRibbonCenter)" />
+  <path d="M45 76 C55 76, 64 68, 68 55 C72 40, 71 36, 71 36 C71 46, 70 56, 67 66 C63 73, 54 77, 45 76 Z" fill="url(#favRibbonRight)" />
+  <circle cx="65" cy="24" r="9" fill="url(#favSphere)" />
+  <circle cx="62.5" cy="21.5" r="2.5" fill="#FFFFFF" opacity="0.9" />
+</svg>
