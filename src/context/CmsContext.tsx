@@ -3,6 +3,7 @@ import { Project, ServiceItem, InsightArticle } from '../types';
 import { projectsData as fallbackProjects } from '../data/projectsData';
 import { servicesData as fallbackServices } from '../data/servicesData';
 import { insightsData as fallbackArticles } from '../data/insightsData';
+import { clientStorage } from '../services/clientStorage';
 
 export interface TestimonialItem {
   id: string;
@@ -127,18 +128,36 @@ const CmsContext = createContext<CmsContextType>({
 });
 
 export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
-  const [services, setServices] = useState<ServiceItem[]>(fallbackServices);
-  const [articles, setArticles] = useState<InsightArticle[]>(fallbackArticles);
-  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(defaultTestimonials);
-  const [homepage, setHomepage] = useState<HomepageConfig>(defaultHomepage);
-  const [siteSettings, setSiteSettings] = useState<SiteSettingsConfig>(defaultSettings);
+  const [projects, setProjects] = useState<Project[]>(() => clientStorage.getProjects(true));
+  const [services, setServices] = useState<ServiceItem[]>(() => clientStorage.getServices(true));
+  const [articles, setArticles] = useState<InsightArticle[]>(() => clientStorage.getArticles(true));
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(() => clientStorage.getTestimonials(true));
+  const [homepage, setHomepage] = useState<HomepageConfig>(() => clientStorage.getHomepage());
+  const [siteSettings, setSiteSettings] = useState<SiteSettingsConfig>(() => clientStorage.getSiteSettings());
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const syncFromClientStorage = () => {
+    try {
+      const p = clientStorage.getProjects(true);
+      if (Array.isArray(p) && p.length > 0) setProjects(p);
+      const s = clientStorage.getServices(true);
+      if (Array.isArray(s) && s.length > 0) setServices(s);
+      const a = clientStorage.getArticles(true);
+      if (Array.isArray(a) && a.length > 0) setArticles(a);
+      const t = clientStorage.getTestimonials(true);
+      if (Array.isArray(t) && t.length > 0) setTestimonials(t);
+      const h = clientStorage.getHomepage();
+      if (h && h.heroTitle) setHomepage(h);
+      const st = clientStorage.getSiteSettings();
+      if (st && st.siteTitle) setSiteSettings(st);
+    } catch {}
+  };
 
   const fetchPublicContent = async () => {
     try {
       const res = await fetch('/api/public/content');
-      if (res.ok) {
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && !contentType.includes('text/html')) {
         const data = await res.json();
         if (Array.isArray(data.projects) && data.projects.length > 0) {
           setProjects(data.projects);
@@ -158,9 +177,13 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         if (data.siteSettings && data.siteSettings.siteTitle) {
           setSiteSettings(data.siteSettings);
         }
+      } else {
+        // Fall back to client-side database
+        syncFromClientStorage();
       }
     } catch {
-      // Graceful fallback to static data
+      // Graceful fallback to client storage data
+      syncFromClientStorage();
     } finally {
       setIsLoading(false);
     }
@@ -168,6 +191,13 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   useEffect(() => {
     fetchPublicContent();
+
+    const handleCmsUpdate = () => {
+      syncFromClientStorage();
+    };
+
+    window.addEventListener('innosight_cms_updated', handleCmsUpdate);
+    return () => window.removeEventListener('innosight_cms_updated', handleCmsUpdate);
   }, []);
 
   return (

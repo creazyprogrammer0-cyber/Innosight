@@ -99,13 +99,29 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onBackTo
               </div>
             </div>
 
-            {/* Quick Demo Credentials Reminder Box */}
-            <div className="p-3 bg-[#7025E8]/10 border border-[#7025E8]/25 rounded-xl text-[11px] text-purple-200 flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#08C9F5]" />
-                <span>Default Initial Master Admin:</span>
+            {/* Quick Demo Credentials Helper */}
+            <div className="p-3 bg-[#7025E8]/10 border border-[#7025E8]/25 rounded-xl text-[11px] text-purple-200">
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-1.5 font-medium">
+                  <Sparkles className="w-3.5 h-3.5 text-[#08C9F5]" />
+                  <span>Initial Admin Credentials</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEmail('admin@innosight.dev');
+                    setPassword('Innosight2026!');
+                    setError(null);
+                  }}
+                  className="text-[10px] text-[#08C9F5] hover:underline cursor-pointer font-semibold"
+                >
+                  Auto-fill Admin
+                </button>
               </div>
-              <span className="font-mono text-purple-300">Innosight2026!</span>
+              <div className="flex items-center justify-between text-slate-400 font-mono text-[10px]">
+                <span>admin@innosight.dev</span>
+                <span className="text-purple-300">Innosight2026!</span>
+              </div>
             </div>
 
             <button
