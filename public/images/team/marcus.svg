@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="marcusBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1627"/>
+      <stop offset="60%" stop-color="#111B30"/>
+      <stop offset="100%" stop-color="#080D18"/>
+    </linearGradient>
+    <radialGradient id="marcusGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#2364F5" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#080D18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="marcusSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F2C6A0"/>
+      <stop offset="100%" stop-color="#DE9E74"/>
+    </linearGradient>
+    <linearGradient id="marcusSweater" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#marcusBg)"/>
+  <circle cx="200" cy="160" r="180" fill="url(#marcusGlow)"/>
+
+  <!-- Body: Navy Slate Tech Crewneck -->
+  <path d="M 85 400 L 95 320 Q 115 265 155 255 L 200 268 L 245 255 Q 285 265 305 320 L 315 400 Z" fill="url(#marcusSweater)"/>
+  <path d="M 160 255 Q 200 275 240 255" stroke="#334155" stroke-width="6" fill="none"/>
+
+  <!-- Neck -->
+  <path d="M 175 205 L 175 255 Q 200 265 225 255 L 225 205 Z" fill="url(#marcusSkin)"/>
+
+  <!-- Head -->
+  <path d="M 136 148 C 136 96 264 96 264 148 C 264 190 248 230 200 230 C 152 230 136 190 136 148 Z" fill="url(#marcusSkin)"/>
+
+  <!-- Hair (Short Brown Cut) -->
+  <path d="M 134 140 C 134 100 148 76 180 72 C 215 68 252 75 266 110 C 268 135 264 145 264 145 C 255 110 245 96 200 96 C 155 96 142 115 134 140 Z" fill="#4A3728"/>
+
+  <!-- Beard & Stubble -->
+  <path d="M 148 180 C 152 224 175 230 200 230 C 225 230 248 224 252 180 C 248 214 225 222 200 222 C 175 222 152 214 148 180 Z" fill="#3D2B1F" opacity="0.7"/>
+
+  <!-- Facial features -->
+  <ellipse cx="170" cy="154" rx="7" ry="5" fill="#FFFFFF"/>
+  <ellipse cx="230" cy="154" rx="7" ry="5" fill="#FFFFFF"/>
+  <circle cx="171" cy="154" r="3.8" fill="#3B4856"/>
+  <circle cx="231" cy="154" r="3.8" fill="#3B4856"/>
+
+  <path d="M 156 142 Q 170 138 184 142" stroke="#3D2B1F" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 216 142 Q 230 138 244 142" stroke="#3D2B1F" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <path d="M 198 156 L 196 178 Q 200 182 204 178 L 202 156" stroke="#C48459" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M 186 198 Q 200 206 214 198" stroke="#873E32" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <rect x="4" y="4" width="392" height="392" rx="28" fill="none" stroke="#1E293B" stroke-width="2"/>
+</svg>

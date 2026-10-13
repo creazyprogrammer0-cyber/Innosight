@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="sophiaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1627"/>
+      <stop offset="60%" stop-color="#19132B"/>
+      <stop offset="100%" stop-color="#080D18"/>
+    </linearGradient>
+    <radialGradient id="sophiaGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#E000C9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#080D18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sophiaSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FCE7D6"/>
+      <stop offset="100%" stop-color="#EDBFA0"/>
+    </linearGradient>
+    <linearGradient id="sophiaTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181824"/>
+      <stop offset="100%" stop-color="#0B0B12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#sophiaBg)"/>
+  <circle cx="200" cy="160" r="180" fill="url(#sophiaGlow)"/>
+
+  <!-- Body: Minimalist charcoal top -->
+  <path d="M 95 400 L 105 320 Q 120 268 155 258 L 200 270 L 245 258 Q 280 268 295 320 L 305 400 Z" fill="url(#sophiaTop)"/>
+  <path d="M 165 258 Q 200 280 235 258" stroke="#7025E8" stroke-width="2" fill="none" opacity="0.6"/>
+
+  <!-- Neck -->
+  <path d="M 178 205 L 178 258 Q 200 266 222 258 L 222 205 Z" fill="url(#sophiaSkin)"/>
+
+  <!-- Head -->
+  <path d="M 140 148 C 140 98 260 98 260 148 C 260 190 244 226 200 226 C 156 226 140 190 140 148 Z" fill="url(#sophiaSkin)"/>
+
+  <!-- Hair (Sleek dark bob parted on side) -->
+  <path d="M 132 145 C 130 96 150 68 195 68 C 245 68 268 96 268 145 C 270 190 262 210 256 210 C 252 180 250 145 242 120 C 228 98 172 98 156 120 C 148 145 146 180 142 210 C 136 210 132 180 132 145 Z" fill="#1C1824"/>
+
+  <!-- Earrings -->
+  <circle cx="138" cy="180" r="3" fill="#E000C9"/>
+  <circle cx="262" cy="180" r="3" fill="#E000C9"/>
+
+  <!-- Facial features -->
+  <ellipse cx="172" cy="154" rx="7" ry="4.8" fill="#FFFFFF"/>
+  <ellipse cx="228" cy="154" rx="7" ry="4.8" fill="#FFFFFF"/>
+  <circle cx="173" cy="154" r="3.6" fill="#1A1820"/>
+  <circle cx="229" cy="154" r="3.6" fill="#1A1820"/>
+
+  <path d="M 158 142 Q 172 136 184 142" stroke="#1C1824" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M 216 142 Q 228 136 242 142" stroke="#1C1824" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <path d="M 198 158 L 197 175 Q 200 178 203 175 L 202 158" stroke="#D19C7C" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M 186 195 Q 200 205 214 195" stroke="#9C3B5A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <rect x="4" y="4" width="392" height="392" rx="28" fill="none" stroke="#1E293B" stroke-width="2"/>
+</svg>

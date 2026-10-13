@@ -4,6 +4,7 @@ import { projectsData } from '../../data/projectsData';
 import { Project } from '../../types';
 import { ProjectCard } from '../projects/ProjectCard';
 import { useTheme } from '../../context/ThemeContext';
+import { useCms } from '../../context/CmsContext';
 
 interface SelectedWorkSectionProps {
   onOpenCaseStudy: (project: Project) => void;
@@ -15,6 +16,7 @@ export const SelectedWorkSection: React.FC<SelectedWorkSectionProps> = ({
   showAllInitially = false,
 }) => {
   const { theme } = useTheme();
+  const { projects: cmsProjects } = useCms();
   const isLight = theme === 'light';
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
@@ -25,7 +27,9 @@ export const SelectedWorkSection: React.FC<SelectedWorkSectionProps> = ({
     { label: 'Custom Operations', value: 'Custom Operational System' },
   ];
 
-  const filteredProjects = projectsData.filter((p) => {
+  const sourceProjects = cmsProjects && cmsProjects.length > 0 ? cmsProjects : projectsData;
+
+  const filteredProjects = sourceProjects.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });

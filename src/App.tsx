@@ -10,6 +10,7 @@ import { ScopeEstimator } from './components/sections/ScopeEstimator';
 import { ApproachSection } from './components/sections/ApproachSection';
 import { EngineeringPillarsSection } from './components/sections/EngineeringPillarsSection';
 import { AboutSection } from './components/sections/AboutSection';
+import { TeamSection } from './components/sections/TeamSection';
 import { InsightsSection } from './components/sections/InsightsSection';
 import { FinalCtaSection } from './components/sections/FinalCtaSection';
 import { CaseStudyModal } from './components/projects/CaseStudyModal';
@@ -23,15 +24,35 @@ import { credentialsData } from './data/credentialsData';
 import { insightsData } from './data/insightsData';
 import { ArrowLeft, ArrowUpRight, ShieldCheck, Mail, Calendar, Sparkles } from 'lucide-react';
 import { useTheme } from './context/ThemeContext';
+import { useCms } from './context/CmsContext';
+import { cmsClient } from './services/cmsClient';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminLogin } from './components/admin/AdminLogin';
 
 export default function App() {
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const { homepage, siteSettings, projects: cmsProjects, services: cmsServices, articles: cmsArticles } = useCms();
   const [currentRoute, setCurrentRoute] = useState<ViewRoute>('home');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<InsightArticle | null>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [adminUser, setAdminUser] = useState<any | null>(null);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  // Check auth session on startup
+  useEffect(() => {
+    cmsClient
+      .getMe()
+      .then((res) => {
+        if (res.authenticated && res.user) {
+          setAdminUser(res.user);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsCheckingAuth(false));
+  }, []);
 
   // Dynamic Contact Form Initial State
   const [contactProjectType, setContactProjectType] = useState('SaaS Platform');
@@ -42,7 +63,7 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '') as ViewRoute;
-      if (['home', 'work', 'services', 'about', 'insights', 'contact'].includes(hash)) {
+      if (['home', 'work', 'services', 'about', 'insights', 'contact', 'admin'].includes(hash)) {
         setCurrentRoute(hash);
       }
     };
@@ -54,12 +75,13 @@ export default function App() {
   // Sync dynamic document title and canonical URL for SEO and browser history
   useEffect(() => {
     const routeTitles: Record<ViewRoute, string> = {
-      home: 'Innosight — Full-Stack Developer & Technical Partner',
+      home: siteSettings?.siteTitle || 'Innosight — Full-Stack Developer & Technical Partner',
       work: 'Selected Work & Systems Architecture — Innosight',
       services: 'Software Engineering Services & Capabilities — Innosight',
       about: 'About Jannatul & Technical Matrix — Innosight',
       insights: 'Founder Insights & Architecture Notes — Innosight',
       contact: 'Project Inquiry & Scoping Desk — Innosight',
+      admin: 'CMS Admin Portal — Innosight Secure Control',
     };
     document.title = routeTitles[currentRoute] || routeTitles.home;
 
@@ -71,7 +93,7 @@ export default function App() {
         currentRoute === 'home' ? canonicalBase : `${canonicalBase}#${currentRoute}`
       );
     }
-  }, [currentRoute]);
+  }, [currentRoute, siteSettings]);
 
   const handleNavigate = (route: ViewRoute) => {
     setCurrentRoute(route);
@@ -104,12 +126,45 @@ export default function App() {
     );
   };
 
+  // Render Full Admin Screen when on #admin route
+  if (currentRoute === 'admin') {
+    if (adminUser) {
+      return (
+        <AdminDashboard
+          currentUser={adminUser}
+          onLogout={() => {
+            setAdminUser(null);
+            handleNavigate('home');
+          }}
+          onViewLiveSite={() => handleNavigate('home')}
+        />
+      );
+    }
+    return (
+      <AdminLogin
+        onLoginSuccess={(user) => setAdminUser(user)}
+        onBackToSite={() => handleNavigate('home')}
+      />
+    );
+  }
+
   return (
     <div className={`min-h-screen flex flex-col font-sans transition-colors ${
       isLight
         ? 'bg-[#F7F8FC] text-[#11172A] selection:bg-[#7025E8]/20 selection:text-[#11172A]'
         : 'bg-[#080D18] text-[#F6F7FF] selection:bg-[#7025E8]/40 selection:text-white'
     }`}>
+      {/* Dynamic Announcement Banner */}
+      {siteSettings?.announcementBanner?.enabled && siteSettings.announcementBanner.text && (
+        <div className="bg-gradient-to-r from-[#7025E8] to-[#9333EA] text-white text-xs py-2 px-4 text-center font-medium flex items-center justify-center gap-2 z-50">
+          <span>{siteSettings.announcementBanner.text}</span>
+          {siteSettings.announcementBanner.link && (
+            <a href={siteSettings.announcementBanner.link} className="underline text-purple-200 hover:text-white">
+              Learn more →
+            </a>
+          )}
+        </div>
+      )}
       {/* 3-Zone Top Bar Navigation */}
       <Header
         currentRoute={currentRoute}
@@ -146,6 +201,9 @@ export default function App() {
             <EngineeringPillarsSection />
             <AboutSection
               onOpenContact={() => handleOpenContact('Collaboration Inquiry')}
+            />
+            <TeamSection
+              onOpenContact={(role) => handleOpenContact(role || 'Team Pod Inquiry')}
             />
             <InsightsSection
               onOpenArticle={(article) => setSelectedArticle(article)}
@@ -249,6 +307,9 @@ export default function App() {
             <CredibilityStrip />
             <AboutSection
               onOpenContact={() => handleOpenContact('Collaboration Inquiry')}
+            />
+            <TeamSection
+              onOpenContact={(role) => handleOpenContact(role || 'Team Pod Inquiry')}
             />
             <EngineeringPillarsSection />
           </div>

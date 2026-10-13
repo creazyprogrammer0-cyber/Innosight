@@ -3,6 +3,7 @@ import { ArrowUpRight, BookOpen, Clock, Calendar } from 'lucide-react';
 import { insightsData } from '../../data/insightsData';
 import { InsightArticle } from '../../types';
 import { useTheme } from '../../context/ThemeContext';
+import { useCms } from '../../context/CmsContext';
 
 interface InsightsSectionProps {
   onOpenArticle: (article: InsightArticle) => void;
@@ -10,7 +11,10 @@ interface InsightsSectionProps {
 
 export const InsightsSection: React.FC<InsightsSectionProps> = ({ onOpenArticle }) => {
   const { theme } = useTheme();
+  const { articles: cmsArticles } = useCms();
   const isLight = theme === 'light';
+
+  const sourceArticles = cmsArticles && cmsArticles.length > 0 ? cmsArticles : insightsData;
 
   return (
     <section
@@ -46,7 +50,7 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({ onOpenArticle 
 
         {/* 3 Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10">
-          {insightsData.map((article) => (
+          {sourceArticles.map((article) => (
             <article
               key={article.id}
               onClick={() => onOpenArticle(article)}

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="devonBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1627"/>
+      <stop offset="60%" stop-color="#141E33"/>
+      <stop offset="100%" stop-color="#080D18"/>
+    </linearGradient>
+    <radialGradient id="devonGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#08C9F5" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#080D18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="devonSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7D5139"/>
+      <stop offset="100%" stop-color="#5E3823"/>
+    </linearGradient>
+    <linearGradient id="devonBlazer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D3748"/>
+      <stop offset="100%" stop-color="#1A202C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#devonBg)"/>
+  <circle cx="200" cy="160" r="180" fill="url(#devonGlow)"/>
+
+  <!-- Body: Charcoal blazer with dark inner crewneck -->
+  <path d="M 85 400 L 95 320 Q 115 265 155 255 L 200 268 L 245 255 Q 285 265 305 320 L 315 400 Z" fill="url(#devonBlazer)"/>
+  <path d="M 170 262 L 200 340 L 230 262 Z" fill="#111827"/>
+  <!-- Lapels -->
+  <path d="M 155 255 L 180 340 L 160 340 Z" fill="#374151"/>
+  <path d="M 245 255 L 220 340 L 240 340 Z" fill="#374151"/>
+
+  <!-- Neck -->
+  <path d="M 175 205 L 175 260 Q 200 270 225 260 L 225 205 Z" fill="url(#devonSkin)"/>
+
+  <!-- Head -->
+  <path d="M 136 148 C 136 96 264 96 264 148 C 264 192 248 230 200 230 C 152 230 136 192 136 148 Z" fill="url(#devonSkin)"/>
+
+  <!-- Hair (Fade buzz cut) -->
+  <path d="M 134 140 C 134 94 150 72 200 72 C 250 72 266 94 266 140 C 264 116 250 84 200 84 C 150 84 136 116 134 140 Z" fill="#1A1310"/>
+
+  <!-- Trimmed goatee -->
+  <path d="M 188 210 Q 200 216 212 210 Q 200 226 188 210 Z" fill="#18110E" opacity="0.6"/>
+
+  <!-- Facial features -->
+  <ellipse cx="170" cy="154" rx="7.5" ry="5" fill="#FFFFFF"/>
+  <ellipse cx="230" cy="154" rx="7.5" ry="5" fill="#FFFFFF"/>
+  <circle cx="171" cy="154" r="3.8" fill="#1E140F"/>
+  <circle cx="231" cy="154" r="3.8" fill="#1E140F"/>
+
+  <path d="M 156 140 Q 170 134 184 139" stroke="#1F1511" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+  <path d="M 216 139 Q 230 134 244 140" stroke="#1F1511" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+
+  <path d="M 197 156 L 195 178 Q 200 182 205 178 L 203 156" stroke="#4F2E1B" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M 185 198 Q 200 208 215 198" stroke="#4A2619" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <rect x="4" y="4" width="392" height="392" rx="28" fill="none" stroke="#1E293B" stroke-width="2"/>
+</svg>

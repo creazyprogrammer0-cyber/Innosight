@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1627"/>
+      <stop offset="50%" stop-color="#141E34"/>
+      <stop offset="100%" stop-color="#080D18"/>
+    </linearGradient>
+    <radialGradient id="ambientGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#7025E8" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#08C9F5" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#080D18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#881B34"/>
+      <stop offset="50%" stop-color="#6E1428"/>
+      <stop offset="100%" stop-color="#540E1E"/>
+    </linearGradient>
+    <linearGradient id="collarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9C243E"/>
+      <stop offset="100%" stop-color="#540E1E"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2B184"/>
+      <stop offset="50%" stop-color="#D49E6F"/>
+      <stop offset="100%" stop-color="#BE8556"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D2426"/>
+      <stop offset="60%" stop-color="#191415"/>
+      <stop offset="100%" stop-color="#0D0A0B"/>
+    </linearGradient>
+    <linearGradient id="glassesGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="400" height="400" fill="url(#bgGrad)"/>
+  <circle cx="200" cy="160" r="180" fill="url(#ambientGlow)"/>
+
+  <!-- Subtle Tech Grid Accent -->
+  <g opacity="0.08" stroke="#08C9F5" stroke-width="1">
+    <line x1="40" y1="0" x2="40" y2="400"/>
+    <line x1="360" y1="0" x2="360" y2="400"/>
+    <line x1="0" y1="40" x2="400" y2="40"/>
+    <line x1="0" y1="360" x2="400" y2="360"/>
+  </g>
+
+  <!-- Shoulders & Torso / Maroon Collared Shirt (Matching uploaded photo) -->
+  <g id="body">
+    <!-- Main Shirt Body -->
+    <path d="M 90 400 L 96 320 Q 110 270 150 258 L 200 274 L 250 258 Q 290 270 304 320 L 310 400 Z" fill="url(#shirtGrad)"/>
+    
+    <!-- Chest button placket -->
+    <path d="M 188 266 L 212 266 L 210 370 L 190 370 Z" fill="#540E1E" opacity="0.7"/>
+    <!-- Small white/silver pearl buttons -->
+    <circle cx="200" cy="285" r="3.5" fill="#E2E8F0" stroke="#718096" stroke-width="1"/>
+    <circle cx="200" cy="320" r="3.5" fill="#E2E8F0" stroke="#718096" stroke-width="1"/>
+    <circle cx="200" cy="355" r="3.5" fill="#E2E8F0" stroke="#718096" stroke-width="1"/>
+
+    <!-- Left Collar Wing -->
+    <path d="M 152 258 L 194 274 L 180 305 L 140 268 Z" fill="url(#collarGrad)" stroke="#4A0C1A" stroke-width="1.5"/>
+    <!-- Right Collar Wing -->
+    <path d="M 248 258 L 206 274 L 220 305 L 260 268 Z" fill="url(#collarGrad)" stroke="#4A0C1A" stroke-width="1.5"/>
+
+    <!-- Neck opening shadow -->
+    <path d="M 175 240 Q 200 264 225 240 Z" fill="#8C5837" opacity="0.6"/>
+  </g>
+
+  <!-- Neck -->
+  <path d="M 172 205 L 172 252 Q 200 265 228 252 L 228 205 Z" fill="url(#skinGrad)"/>
+  <!-- Neck shadow under chin -->
+  <path d="M 172 205 Q 200 225 228 205 Q 200 215 172 205 Z" fill="#9C633E" opacity="0.5"/>
+
+  <!-- Head & Face Structure -->
+  <g id="head">
+    <!-- Ears -->
+    <path d="M 132 165 C 122 165 120 195 133 202 Z" fill="#D49E6F"/>
+    <path d="M 268 165 C 278 165 280 195 267 202 Z" fill="#D49E6F"/>
+
+    <!-- Face Shape -->
+    <path d="M 134 145 C 134 95 266 95 266 145 C 266 185 248 228 200 228 C 152 228 134 185 134 145 Z" fill="url(#skinGrad)" filter="url(#cardShadow)"/>
+
+    <!-- Subtle cheek contours & warm blush -->
+    <circle cx="160" cy="175" r="18" fill="#C57D50" opacity="0.18"/>
+    <circle cx="240" cy="175" r="18" fill="#C57D50" opacity="0.18"/>
+
+    <!-- Trimmed Beard / Goatee & Stubble (Matching uploaded photo) -->
+    <path d="M 148 185 C 152 218 175 226 200 226 C 225 226 248 218 252 185 C 248 212 225 220 200 220 C 175 220 152 212 148 185 Z" fill="#241D1F" opacity="0.45"/>
+    <!-- Chin Goatee -->
+    <path d="M 188 208 Q 200 212 212 208 Q 200 224 188 208 Z" fill="#221A1D" opacity="0.55"/>
+    <!-- Neat Mustache above lip -->
+    <path d="M 184 193 Q 200 191 216 193 Q 200 198 184 193 Z" fill="#221A1D" opacity="0.6"/>
+
+    <!-- Mouth & Smile -->
+    <path d="M 182 198 Q 200 210 218 198" stroke="#873E32" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <!-- Gentle teeth / smile highlight -->
+    <path d="M 188 199 Q 200 205 212 199" fill="#FFFFFF" opacity="0.85"/>
+
+    <!-- Nose -->
+    <path d="M 197 156 L 195 178 Q 200 182 205 178 L 203 156" stroke="#B87B4E" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- Eyes -->
+    <ellipse cx="168" cy="154" rx="8" ry="5.5" fill="#FFFFFF"/>
+    <ellipse cx="232" cy="154" rx="8" ry="5.5" fill="#FFFFFF"/>
+    <!-- Iris & Pupil (Dark Brown) -->
+    <circle cx="169" cy="154" r="4.2" fill="#261A15"/>
+    <circle cx="233" cy="154" r="4.2" fill="#261A15"/>
+    <circle cx="167.5" cy="152.5" r="1.3" fill="#FFFFFF"/>
+    <circle cx="231.5" cy="152.5" r="1.3" fill="#FFFFFF"/>
+
+    <!-- Eyebrows (Neat, Dark) -->
+    <path d="M 152 141 Q 168 136 182 140" stroke="#1F181A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <path d="M 218 140 Q 232 136 248 141" stroke="#1F181A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Rectangular Black Glasses (Exact match to uploaded picture) -->
+    <g id="glasses" stroke="url(#glassesGrad)" stroke-width="3.2" fill="none">
+      <!-- Left frame -->
+      <rect x="150" y="142" width="36" height="24" rx="5" fill="#08C9F5" fill-opacity="0.06"/>
+      <!-- Right frame -->
+      <rect x="214" y="142" width="36" height="24" rx="5" fill="#08C9F5" fill-opacity="0.06"/>
+      <!-- Bridge -->
+      <path d="M 186 150 Q 200 147 214 150"/>
+      <!-- Left hinge/temple -->
+      <path d="M 150 148 L 134 152"/>
+      <!-- Right hinge/temple -->
+      <path d="M 250 148 L 266 152"/>
+      <!-- Glass reflection glint -->
+      <line x1="156" y1="145" x2="164" y2="145" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+      <line x1="220" y1="145" x2="228" y2="145" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+    </g>
+
+    <!-- Hair (Styled up/pompadour, tapered sides - exact match to user's photo) -->
+    <g id="hair">
+      <path d="M 132 148 
+               C 130 115 138 82 170 72 
+               C 192 65 218 64 238 72 
+               C 265 82 270 115 268 148 
+               C 264 125 258 105 240 98 
+               C 220 92 180 92 160 98 
+               C 142 105 136 125 132 148 Z" 
+            fill="url(#hairGrad)"/>
+      <!-- Hair volume & stroke highlights -->
+      <path d="M 156 86 Q 195 72 244 86" stroke="#423538" stroke-width="2.5" fill="none" opacity="0.6"/>
+      <path d="M 166 78 Q 200 68 232 78" stroke="#4E3F43" stroke-width="2" fill="none" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- Clean Tech Border Accent -->
+  <rect x="4" y="4" width="392" height="392" rx="28" fill="none" stroke="#1E293B" stroke-width="2"/>
+  <rect x="4" y="4" width="392" height="392" rx="28" fill="none" stroke="url(#collarGrad)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Verified Badge in corner -->
+  <g transform="translate(320, 320)">
+    <circle cx="20" cy="20" r="18" fill="#080D18" stroke="#08C9F5" stroke-width="2"/>
+    <path d="M 13 20 L 18 25 L 28 14" fill="none" stroke="#08C9F5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

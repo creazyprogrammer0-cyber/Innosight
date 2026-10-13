@@ -37,23 +37,76 @@
     </script>
     <script>
       (function() {
-        // Guard against browser extensions (e.g. adblockers, security suites) attempting
-        // `window.fetch = ...` when window.fetch has only a getter in certain iframe contexts.
+        // 1. Guard window.fetch: Provide a writable accessor on window and Window.prototype
+        // so that browser extensions (e.g. adblockers, security tools, frame_ant.js)
+        // can assign `window.fetch = ...` without throwing:
+        // "TypeError: Cannot set property fetch of #<Window> which has only a getter"
         try {
-          if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
-            var currentFetch = window.fetch;
-            var desc = Object.getOwnPropertyDescriptor(window, 'fetch') || Object.getOwnPropertyDescriptor(Object.getPrototypeOf(window), 'fetch');
-            if (desc && !desc.writable && (desc.configurable || desc.set === undefined)) {
-              Object.defineProperty(window, 'fetch', {
-                get: function() { return currentFetch; },
-                set: function(fn) { currentFetch = fn; },
+          var _nativeFetch = window.fetch;
+          var _activeFetch = typeof _nativeFetch === 'function' ? _nativeFetch.bind(window) : _nativeFetch;
+
+          var patchTarget = function(target) {
+            if (!target) return;
+            try {
+              Object.defineProperty(target, 'fetch', {
+                get: function() {
+                  return _activeFetch;
+                },
+                set: function(newFetch) {
+                  _activeFetch = newFetch;
+                },
                 configurable: true,
                 enumerable: true
               });
-            }
+            } catch (err) {}
+          };
+
+          patchTarget(window);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            patchTarget(Window.prototype);
           }
         } catch (e) {}
 
+        // 2. Global Error Interceptor for extension-injected scripts
+        var isExtensionError = function(msg, src, err) {
+          var s = (String(msg || '') + ' ' + String(src || '') + ' ' + String(err && err.stack ? err.stack : '')).toLowerCase();
+          return (
+            s.indexOf('chrome-extension://') !== -1 ||
+            s.indexOf('moz-extension://') !== -1 ||
+            s.indexOf('frame_ant') !== -1 ||
+            s.indexOf('cannot set property fetch') !== -1 ||
+            s.indexOf('which has only a getter') !== -1
+          );
+        };
+
+        window.addEventListener('error', function(event) {
+          if (isExtensionError(event.message, event.filename, event.error)) {
+            if (event.preventDefault) event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        var _origOnError = window.onerror;
+        window.onerror = function(msg, src, line, col, err) {
+          if (isExtensionError(msg, src, err)) {
+            return true;
+          }
+          if (typeof _origOnError === 'function') {
+            return _origOnError.apply(this, arguments);
+          }
+          return false;
+        };
+
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event && event.reason;
+          if (isExtensionError(reason && reason.message, '', reason)) {
+            if (event.preventDefault) event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          }
+        }, true);
+
+        // 3. Theme initialization
         try {
           var t = localStorage.getItem('innosight_theme');
           if (t === 'light') {

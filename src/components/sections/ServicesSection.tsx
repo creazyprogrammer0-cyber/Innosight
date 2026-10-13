@@ -3,6 +3,7 @@ import { ArrowUpRight, CheckCircle2, Layers, Cpu, Code2 } from 'lucide-react';
 import { servicesData } from '../../data/servicesData';
 import { ServiceItem } from '../../types';
 import { useTheme } from '../../context/ThemeContext';
+import { useCms } from '../../context/CmsContext';
 
 interface ServicesSectionProps {
   onOpenServiceDetail: (service: ServiceItem) => void;
@@ -14,7 +15,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   onOpenContact,
 }) => {
   const { theme } = useTheme();
+  const { services: cmsServices, homepage } = useCms();
   const isLight = theme === 'light';
+
+  const sourceServices = cmsServices && cmsServices.length > 0 ? cmsServices : servicesData;
 
   const iconMap: { [key: string]: React.ReactNode } = {
     'saas-development': <Layers className="w-5 h-5 text-[#08C9F5]" />,
@@ -46,17 +50,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               isLight ? 'text-[#11172A]' : 'text-[#F6F7FF]'
             }`}
           >
-            Build the right solution for the problem you're solving.
+            {homepage?.servicesHeading || "Build the right solution for the problem you're solving."}
           </h2>
           <p className={`text-base max-w-2xl mt-2 ${isLight ? 'text-[#4B5565]' : 'text-[#A8B3C9]'}`}>
-            Every engagement starts by identifying your business constraints, user journeys, and the
-            simplest architecture capable of achieving your business goals.
+            {homepage?.servicesDescription || "Every engagement starts by identifying your business constraints, user journeys, and the simplest architecture capable of achieving your business goals."}
           </p>
         </div>
 
         {/* 3 Core Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10">
-          {servicesData.map((service, index) => (
+          {sourceServices.map((service, index) => (
             <div
               key={service.id}
               onClick={() => onOpenServiceDetail(service)}

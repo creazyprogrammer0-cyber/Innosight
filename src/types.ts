@@ -1,4 +1,4 @@
-export type ViewRoute = 'home' | 'work' | 'services' | 'about' | 'insights' | 'contact';
+export type ViewRoute = 'home' | 'work' | 'services' | 'about' | 'insights' | 'contact' | 'admin';
 
 export interface Project {
   id: string;
@@ -71,4 +71,38 @@ export interface CredentialStat {
   label: string;
   value: string;
   detail: string;
+}
+
+export type TeamDepartment =
+  | 'All'
+  | 'Leadership & Architecture'
+  | 'Engineering'
+  | 'Design & UX'
+  | 'AI & Data'
+  | 'Cloud & DevOps';
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  department: TeamDepartment;
+  isLead?: boolean;
+  avatar: string;
+  avatarFallbacks?: string[];
+  fallbackInitials: string;
+  experience: string;
+  bio: string;
+  detailedBio?: string;
+  badges: string[];
+  skills: string[];
+  metrics?: {
+    label: string;
+    value: string;
+  };
+  socials?: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+    email?: string;
+  };
 }

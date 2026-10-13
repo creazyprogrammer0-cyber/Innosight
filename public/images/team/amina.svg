@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="aminaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1627"/>
+      <stop offset="60%" stop-color="#10252D"/>
+      <stop offset="100%" stop-color="#080D18"/>
+    </linearGradient>
+    <radialGradient id="aminaGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#080D18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="aminaSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D99E74"/>
+      <stop offset="100%" stop-color="#B8764C"/>
+    </linearGradient>
+    <linearGradient id="aminaTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F4C5C"/>
+      <stop offset="100%" stop-color="#082A33"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#aminaBg)"/>
+  <circle cx="200" cy="160" r="180" fill="url(#aminaGlow)"/>
+
+  <!-- Body: Deep Teal Tech Blazer -->
+  <path d="M 90 400 L 100 320 Q 115 265 155 255 L 200 268 L 245 255 Q 285 265 300 320 L 310 400 Z" fill="url(#aminaTop)"/>
+  <path d="M 165 258 Q 200 280 235 258" stroke="#08C9F5" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+  <!-- Neck -->
+  <path d="M 176 205 L 176 256 Q 200 266 224 256 L 224 205 Z" fill="url(#aminaSkin)"/>
+
+  <!-- Head -->
+  <path d="M 138 148 C 138 98 262 98 262 148 C 262 190 246 228 200 228 C 154 228 138 190 138 148 Z" fill="url(#aminaSkin)"/>
+
+  <!-- Hair (Sleek dark updo with gentle waves) -->
+  <path d="M 132 145 C 130 92 152 64 200 64 C 248 64 270 92 268 145 C 266 120 252 86 200 86 C 148 86 134 120 132 145 Z" fill="#1C1412"/>
+  <path d="M 130 145 C 130 185 138 195 142 195 C 144 175 140 145 146 125 C 138 135 132 140 130 145 Z" fill="#1C1412"/>
+  <path d="M 270 145 C 270 185 262 195 258 195 C 256 175 260 145 254 125 C 262 135 268 140 270 145 Z" fill="#1C1412"/>
+
+  <!-- Facial features -->
+  <ellipse cx="170" cy="154" rx="7.5" ry="5" fill="#FFFFFF"/>
+  <ellipse cx="230" cy="154" rx="7.5" ry="5" fill="#FFFFFF"/>
+  <circle cx="171" cy="154" r="3.8" fill="#201510"/>
+  <circle cx="231" cy="154" r="3.8" fill="#201510"/>
+
+  <path d="M 156 141 Q 170 136 184 141" stroke="#1F1512" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+  <path d="M 216 141 Q 230 136 244 141" stroke="#1F1512" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+
+  <path d="M 198 156 L 196 177 Q 200 180 204 177 L 202 156" stroke="#9C5C36" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M 185 196 Q 200 206 215 196" stroke="#7A3026" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <rect x="4" y="4" width="392" height="392" rx="28" fill="none" stroke="#1E293B" stroke-width="2"/>
+</svg>

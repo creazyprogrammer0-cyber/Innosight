@@ -107,6 +107,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenContact }) => 
                 </button>
               </li>
               <li>
+                <a
+                  href="#team"
+                  className={`transition-colors ${
+                    isLight ? 'hover:text-[#11172A]' : 'hover:text-white'
+                  }`}
+                >
+                  Core Engineering Team (5 Specialists)
+                </a>
+              </li>
+              <li>
                 <button
                   onClick={() => handleNav('insights')}
                   className={`transition-colors ${
@@ -215,6 +225,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenContact }) => 
               }`}
             >
               Working Terms & Handoff
+            </button>
+            <button
+              onClick={() => handleNav('admin')}
+              className={`transition-colors font-mono text-[11px] flex items-center gap-1 ${
+                isLight ? 'text-slate-400 hover:text-[#7025E8]' : 'text-slate-500 hover:text-[#08C9F5]'
+              }`}
+            >
+              <span>🔒 Admin CMS</span>
             </button>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
