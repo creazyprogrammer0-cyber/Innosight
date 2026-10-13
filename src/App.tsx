@@ -128,6 +128,13 @@ export default function App() {
 
   // Render Full Admin Screen when on #admin route
   if (currentRoute === 'admin') {
+    if (isCheckingAuth) {
+      return (
+        <div className="min-h-screen bg-[#080D18] flex items-center justify-center">
+          <div className="w-8 h-8 border-3 border-[#7025E8] border-t-transparent rounded-full animate-spin" />
+        </div>
+      );
+    }
     if (adminUser) {
       return (
         <AdminDashboard
