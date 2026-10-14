@@ -35,7 +35,9 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ onOpenContact }) => {
   const founder = getFounder();
   const allDepartments = getTeamDepartments();
 
-  const filteredMembers = teamMembers.filter((member) => {
+  const safeMembers = Array.isArray(teamMembers) ? teamMembers : [];
+  const filteredMembers = safeMembers.filter((member) => {
+    if (!member) return false;
     if (selectedDept === 'All') return true;
     return member.department === selectedDept;
   });

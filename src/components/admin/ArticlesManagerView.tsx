@@ -13,9 +13,10 @@ export const ArticlesManagerView: React.FC = () => {
     setLoading(true);
     try {
       const data = await cmsClient.getArticles();
-      setArticles(data);
+      setArticles(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message || 'Failed to load articles');
+      setArticles([]);
     } finally {
       setLoading(false);
     }
@@ -106,7 +107,7 @@ export const ArticlesManagerView: React.FC = () => {
           </div>
         ) : (
           <div className="divide-y divide-slate-100">
-            {articles.map((art) => (
+            {(Array.isArray(articles) ? articles : []).map((art) => (
               <div key={art.id} className="p-5 flex items-start justify-between gap-4 hover:bg-slate-50/70 transition-colors">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">

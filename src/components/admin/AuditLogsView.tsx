@@ -12,9 +12,10 @@ export const AuditLogsView: React.FC = () => {
     setLoading(true);
     try {
       const data = await cmsClient.getAuditLogs();
-      setLogs(data);
+      setLogs(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
+      setLogs([]);
     } finally {
       setLoading(false);
     }
@@ -24,11 +25,14 @@ export const AuditLogsView: React.FC = () => {
     loadLogs();
   }, []);
 
-  const filteredLogs = logs.filter((l) => {
-    const matchesSearch =
-      l.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.details.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.actorEmail.toLowerCase().includes(searchQuery.toLowerCase());
+  const safeLogs = Array.isArray(logs) ? logs : [];
+  const filteredLogs = safeLogs.filter((l) => {
+    if (!l) return false;
+    const action = String(l.action || '').toLowerCase();
+    const details = String(l.details || '').toLowerCase();
+    const actorEmail = String(l.actorEmail || '').toLowerCase();
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = action.includes(query) || details.includes(query) || actorEmail.includes(query);
     const matchesOutcome = outcomeFilter === 'all' || l.outcome === outcomeFilter;
     return matchesSearch && matchesOutcome;
   });

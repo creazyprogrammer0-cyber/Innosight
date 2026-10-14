@@ -25,9 +25,10 @@ export const MediaLibraryView: React.FC = () => {
     setLoading(true);
     try {
       const data = await cmsClient.getMedia();
-      setMediaItems(data);
+      setMediaItems(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message || 'Failed to load media library');
+      setMediaItems([]);
     } finally {
       setLoading(false);
     }
@@ -71,10 +72,14 @@ export const MediaLibraryView: React.FC = () => {
     }
   };
 
-  const filteredMedia = mediaItems.filter((m) =>
-    (m.originalName || m.filename || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (m.altText || '').toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const safeMedia = Array.isArray(mediaItems) ? mediaItems : [];
+  const filteredMedia = safeMedia.filter((m) => {
+    if (!m) return false;
+    const name = String(m.originalName || m.filename || '').toLowerCase();
+    const alt = String(m.altText || '').toLowerCase();
+    const query = searchQuery.toLowerCase();
+    return name.includes(query) || alt.includes(query);
+  });
 
   return (
     <div className="space-y-6">

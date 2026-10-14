@@ -193,7 +193,10 @@ export const cmsClient = {
   async getOverview() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any>('/api/cms/overview');
+        const data = await apiRequest<any>('/api/cms/overview');
+        if (data && typeof data === 'object' && typeof data.totalProjects === 'number') {
+          return data;
+        }
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
@@ -206,13 +209,15 @@ export const cmsClient = {
   async getProjects() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any[]>('/api/cms/projects');
+        const data = await apiRequest<any[]>('/api/cms/projects');
+        if (Array.isArray(data)) return data;
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
       }
     }
-    return clientStorage.getProjects();
+    const local = clientStorage.getProjects();
+    return Array.isArray(local) ? local : [];
   },
 
   async saveProject(project: any) {
@@ -256,13 +261,15 @@ export const cmsClient = {
   async getServices() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any[]>('/api/cms/services');
+        const data = await apiRequest<any[]>('/api/cms/services');
+        if (Array.isArray(data)) return data;
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
       }
     }
-    return clientStorage.getServices();
+    const local = clientStorage.getServices();
+    return Array.isArray(local) ? local : [];
   },
 
   async saveService(service: any) {
@@ -306,13 +313,15 @@ export const cmsClient = {
   async getArticles() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any[]>('/api/cms/articles');
+        const data = await apiRequest<any[]>('/api/cms/articles');
+        if (Array.isArray(data)) return data;
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
       }
     }
-    return clientStorage.getArticles();
+    const local = clientStorage.getArticles();
+    return Array.isArray(local) ? local : [];
   },
 
   async saveArticle(article: any) {
@@ -356,13 +365,15 @@ export const cmsClient = {
   async getTestimonials() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any[]>('/api/cms/testimonials');
+        const data = await apiRequest<any[]>('/api/cms/testimonials');
+        if (Array.isArray(data)) return data;
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
       }
     }
-    return clientStorage.getTestimonials();
+    const local = clientStorage.getTestimonials();
+    return Array.isArray(local) ? local : [];
   },
 
   async saveTestimonial(testimonial: any) {
@@ -462,13 +473,15 @@ export const cmsClient = {
   async getMedia() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any[]>('/api/cms/media');
+        const data = await apiRequest<any[]>('/api/cms/media');
+        if (Array.isArray(data)) return data;
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
       }
     }
-    return clientStorage.getMedia();
+    const local = clientStorage.getMedia();
+    return Array.isArray(local) ? local : [];
   },
 
   async uploadMedia(file: File, altText?: string) {
@@ -530,13 +543,15 @@ export const cmsClient = {
   async getAuditLogs() {
     if (currentStorageMode === 'server') {
       try {
-        return await apiRequest<any[]>('/api/cms/audit-logs');
+        const data = await apiRequest<any[]>('/api/cms/audit-logs');
+        if (Array.isArray(data)) return data;
       } catch (err: any) {
         if (err.message !== 'SERVER_ENDPOINT_UNAVAILABLE') throw err;
         currentStorageMode = 'client';
       }
     }
-    return clientStorage.getAuditLogs();
+    const local = clientStorage.getAuditLogs();
+    return Array.isArray(local) ? local : [];
   },
 
   // Backup & Recovery tools

@@ -13,9 +13,10 @@ export const ServicesManagerView: React.FC = () => {
     setLoading(true);
     try {
       const data = await cmsClient.getServices();
-      setServices(data);
+      setServices(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message || 'Failed to load services');
+      setServices([]);
     } finally {
       setLoading(false);
     }
@@ -98,7 +99,7 @@ export const ServicesManagerView: React.FC = () => {
           </div>
         ) : (
           <div className="divide-y divide-slate-100">
-            {services.map((s) => (
+            {(Array.isArray(services) ? services : []).map((s) => (
               <div key={s.id} className="p-5 flex items-start justify-between gap-4 hover:bg-slate-50/70 transition-colors">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">

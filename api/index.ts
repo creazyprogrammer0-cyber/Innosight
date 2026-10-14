@@ -117,10 +117,10 @@ export default async function handler(req: any, res: any) {
     return sendJson(200, { success: true, message: 'Logged out successfully.' });
   }
 
-  // Default response
-  return sendJson(200, {
-    status: 'ok',
-    message: 'Innosight Vercel API Gateway Active',
-    timestamp: new Date().toISOString(),
+  // Unhandled endpoints - Return 404 Not Found so client fallbacks activate gracefully
+  return sendJson(404, {
+    error: 'Endpoint not found or handler not available in serverless mode',
+    code: 'NOT_FOUND',
+    pathname,
   });
 }

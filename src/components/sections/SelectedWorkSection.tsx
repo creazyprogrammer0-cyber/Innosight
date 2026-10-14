@@ -27,9 +27,12 @@ export const SelectedWorkSection: React.FC<SelectedWorkSectionProps> = ({
     { label: 'Custom Operations', value: 'Custom Operational System' },
   ];
 
-  const sourceProjects = cmsProjects && cmsProjects.length > 0 ? cmsProjects : projectsData;
+  const sourceProjects = Array.isArray(cmsProjects) && cmsProjects.length > 0
+    ? cmsProjects
+    : (Array.isArray(projectsData) ? projectsData : []);
 
   const filteredProjects = sourceProjects.filter((p) => {
+    if (!p) return false;
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });

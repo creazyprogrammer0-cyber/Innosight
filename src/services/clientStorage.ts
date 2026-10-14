@@ -187,9 +187,17 @@ class ClientStorageService {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed && parsed.projects && parsed.homepage) {
+        if (parsed && typeof parsed === 'object') {
+          parsed.projects = Array.isArray(parsed.projects) ? parsed.projects : [];
+          parsed.services = Array.isArray(parsed.services) ? parsed.services : [];
+          parsed.articles = Array.isArray(parsed.articles) ? parsed.articles : [];
+          parsed.testimonials = Array.isArray(parsed.testimonials) ? parsed.testimonials : [];
+          parsed.media = Array.isArray(parsed.media) ? parsed.media : [];
+          parsed.auditLogs = Array.isArray(parsed.auditLogs) ? parsed.auditLogs : [];
+          if (!parsed.homepage) parsed.homepage = getInitialLocalData().homepage;
+          if (!parsed.siteSettings) parsed.siteSettings = getInitialLocalData().siteSettings;
           this.db = parsed;
-          return this.db!;
+          return parsed;
         }
       }
     } catch (e) {
@@ -246,10 +254,10 @@ class ClientStorageService {
 
   public getOverview() {
     const db = this.load();
-    const projects = db.projects || [];
-    const services = db.services || [];
-    const articles = db.articles || [];
-    const testimonials = db.testimonials || [];
+    const projects = Array.isArray(db.projects) ? db.projects : [];
+    const services = Array.isArray(db.services) ? db.services : [];
+    const articles = Array.isArray(db.articles) ? db.articles : [];
+    const testimonials = Array.isArray(db.testimonials) ? db.testimonials : [];
 
     return {
       totalProjects: projects.length,
@@ -270,10 +278,11 @@ class ClientStorageService {
   // Projects
   public getProjects(onlyPublished = false) {
     const db = this.load();
+    const list = Array.isArray(db.projects) ? db.projects : [];
     if (onlyPublished) {
-      return (db.projects || []).filter((p) => p.status === 'published');
+      return list.filter((p) => p && p.status === 'published');
     }
-    return db.projects || [];
+    return list;
   }
 
   public saveProject(project: any) {
@@ -328,10 +337,11 @@ class ClientStorageService {
   // Services
   public getServices(onlyPublished = false) {
     const db = this.load();
+    const list = Array.isArray(db.services) ? db.services : [];
     if (onlyPublished) {
-      return (db.services || []).filter((s) => s.status === 'published');
+      return list.filter((s) => s && s.status === 'published');
     }
-    return db.services || [];
+    return list;
   }
 
   public saveService(service: any) {
@@ -382,10 +392,11 @@ class ClientStorageService {
   // Articles
   public getArticles(onlyPublished = false) {
     const db = this.load();
+    const list = Array.isArray(db.articles) ? db.articles : [];
     if (onlyPublished) {
-      return (db.articles || []).filter((a) => a.status === 'published');
+      return list.filter((a) => a && a.status === 'published');
     }
-    return db.articles || [];
+    return list;
   }
 
   public saveArticle(article: any) {
@@ -436,10 +447,11 @@ class ClientStorageService {
   // Testimonials
   public getTestimonials(onlyPublished = false) {
     const db = this.load();
+    const list = Array.isArray(db.testimonials) ? db.testimonials : [];
     if (onlyPublished) {
-      return (db.testimonials || []).filter((t) => t.status === 'published');
+      return list.filter((t) => t && t.status === 'published');
     }
-    return db.testimonials || [];
+    return list;
   }
 
   public saveTestimonial(testimonial: any) {
@@ -570,7 +582,7 @@ class ClientStorageService {
   // Audit Logs
   public getAuditLogs() {
     const db = this.load();
-    return db.auditLogs || [];
+    return Array.isArray(db.auditLogs) ? db.auditLogs : [];
   }
 
   public logAudit(action: string, resourceType: string, details: string, outcome: 'success' | 'failure' = 'success') {

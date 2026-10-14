@@ -31,9 +31,10 @@ export const ProjectsManagerView: React.FC = () => {
     setLoading(true);
     try {
       const data = await cmsClient.getProjects();
-      setProjects(data);
+      setProjects(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message || 'Failed to load projects');
+      setProjects([]);
     } finally {
       setLoading(false);
     }
@@ -102,11 +103,13 @@ export const ProjectsManagerView: React.FC = () => {
     }
   };
 
-  const filteredProjects = projects.filter((p) => {
+  const safeProjects = Array.isArray(projects) ? projects : [];
+  const filteredProjects = safeProjects.filter((p) => {
+    if (!p) return false;
     const matchesQuery =
-      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchQuery.toLowerCase());
+      String(p.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      String(p.slug || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      String(p.category || '').toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filterStatus === 'all' || p.status === filterStatus;
     return matchesQuery && matchesFilter;
   });
